@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | Student Queue</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <header class="bg-white shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-gray-800">Student Profile</h1>
+            <a href="dashboard.html" class="text-blue-600 hover:text-blue-800">
+                <i class="fas fa-arrow-left text-2xl"></i>
+            </a>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-6">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-100 text-blue-600 rounded-full w-16 h-16 flex items-center justify-center mr-4">
+                    <i class="fas fa-user text-2xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-semibold" id="studentName">John Doe</h2>
+                    <p class="text-gray-600" id="studentId">ID: S12345678</p>
+                </div>
+            </div>
+            
+            <div class="space-y-4 mb-8">
+                <div class="flex items-center">
+                    <i class="fas fa-envelope text-gray-400 mr-3 w-5"></i>
+                    <span class="text-gray-700" id="studentEmail">john.doe@university.edu</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-phone text-gray-400 mr-3 w-5"></i>
+                    <span class="text-gray-700" id="studentPhone">+1 (555) 123-4567</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-calendar-alt text-gray-400 mr-3 w-5"></i>
+                    <span class="text-gray-700">Member since: <span id="memberSince">Jan 2023</span></span>
+                </div>
+            </div>
+            
+            <button id="logoutBtn" class="w-full bg-red-50 text-red-600 py-2 px-4 rounded-md hover:bg-red-100 transition duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+            </button>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">Queue History</h2>
+            
+            <div class="divide-y divide-gray-200">
+                <!-- Today's queue -->
+                <div class="py-4">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="font-medium">Registrar Office</span>
+                        <span class="text-sm text-gray-500">Today</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-blue-600 font-medium">A-25</span>
+                        <span class="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">Completed</span>
+                    </div>
+                </div>
+                
+                <!-- Previous queues -->
+                <div class="py-4">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="font-medium">Admission Office</span>
+                        <span class="text-sm text-gray-500">2 days ago</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-blue-600 font-medium">B-12</span>
+                        <span class="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">Completed</span>
+                    </div>
+                </div>
+                
+                <div class="py-4">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="font-medium">Cashier Office</span>
+                        <span class="text-sm text-gray-500">1 week ago</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-blue-600 font-medium">C-08</span>
+                        <span class="text-sm bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Cancelled</span>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="w-full mt-4 text-center text-blue-600 hover:text-blue-800 text-sm font-medium">
+                View Full History
+            </button>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get student data from localStorage (demo purposes)
+            const studentId = localStorage.getItem('studentId') || 'S12345678';
+            document.getElementById('studentId').textContent = `ID: ${studentId}`;
+            
+            // Mock student data
+            const studentData = {
+                name: 'John Doe',
+                email: 'john.doe@university.edu',
+                phone: '+1 (555) 123-4567',
+                joinDate: 'Jan 2023'
+            };
+            
+            document.getElementById('studentName').textContent = studentData.name;
+            document.getElementById('studentEmail').textContent = studentData.email;
+            document.getElementById('studentPhone').textContent = studentData.phone;
+            document.getElementById('memberSince').textContent = studentData.joinDate;
+            
+            // Handle logout
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                localStorage.removeItem('studentId');
+                localStorage.removeItem('queueNumber');
+                localStorage.removeItem('queueOffice');
+                localStorage.removeItem('queueDate');
+                window.location.href = 'login.html';
+            });
+        });
+    </script>
+</body>
+</html>
